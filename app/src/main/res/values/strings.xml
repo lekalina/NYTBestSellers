@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">NYTBestSellers</string>
+    <string name="nyt_best_sellers">NYT Best Sellers</string>
+    <string name="nyt_logo">NYT logo</string>
+    <string name="select_a_category">Select a category:</string>
+    <string name="no_content_available">No Content Available</string>
+    <string name="offline_content">Viewing Offline Content</string>
+</resources>

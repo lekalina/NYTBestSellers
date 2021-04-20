@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.lekalina.nytbestsellers.vm.BookItemViewModel" />
+    </data>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image"
+            loadThumb="@{viewModel.book.image_url}"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:minHeight="32dp"
+            android:adjustViewBounds="true"
+            android:layout_margin="@dimen/standard_margin"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/title"
+            android:text="@{viewModel.book.title}"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="false"
+            android:fontFamily="@font/cheltenham_std_bold" />
+
+        <TextView
+            android:id="@+id/author"
+            android:text="@{viewModel.book.author}"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:layout_marginBottom="@dimen/standard_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="false"
+            android:fontFamily="@font/cheltenham_std_light"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

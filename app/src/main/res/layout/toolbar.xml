@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Toolbar
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_toolbar_height"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentInsetLeft="0dp"
+        android:contentInsetStart="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetEnd="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/image"
+                android:src="@drawable/nyt_logo"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_centerVertical="true"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:contentDescription="@string/nyt_logo" />
+
+            <TextView
+                android:text="@string/nyt_best_sellers"
+                android:layout_toEndOf="@id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:fontFamily="@font/cheltenham_std_bold"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="@color/black"
+                android:layout_marginStart="@dimen/standard_margin"/>
+
+            <RelativeLayout
+                android:background="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+            <RelativeLayout
+                android:background="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"/>
+
+        </RelativeLayout>
+
+    </Toolbar>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
