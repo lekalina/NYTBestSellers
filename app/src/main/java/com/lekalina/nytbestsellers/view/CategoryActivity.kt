@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lekalina.nytbestsellers.NYT
 import com.lekalina.nytbestsellers.vm.CategoryViewModel
@@ -23,7 +24,7 @@ class CategoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val context = this
         binding = DataBindingUtil.setContentView(this, R.layout.activity_category)
-        model = CategoryViewModel()
+        model = ViewModelProvider(this).get(CategoryViewModel::class.java)
         binding.viewModel = model
         binding.lifecycleOwner = this
 

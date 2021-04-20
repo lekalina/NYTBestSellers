@@ -6,12 +6,14 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lekalina.nytbestsellers.NYT
 import com.lekalina.nytbestsellers.R
 import com.lekalina.nytbestsellers.data.Book
 import com.lekalina.nytbestsellers.databinding.ActivityBooksBinding
 import com.lekalina.nytbestsellers.vm.BooksViewModel
+import com.lekalina.nytbestsellers.vm.BooksViewModelFactory
 import com.lekalina.nytbestsellers.vm.ContentState
 import kotlinx.android.synthetic.main.activity_category.list
 import kotlinx.android.synthetic.main.activity_category.refresh
@@ -25,7 +27,7 @@ class BooksActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val categoryId = intent.getStringExtra("category_id")
         binding = DataBindingUtil.setContentView(this, R.layout.activity_books)
-        model = BooksViewModel(categoryId)
+        model = ViewModelProvider(this, BooksViewModelFactory(categoryId)).get(BooksViewModel::class.java)
         binding.viewModel = model
         binding.lifecycleOwner = this
         val context = this
