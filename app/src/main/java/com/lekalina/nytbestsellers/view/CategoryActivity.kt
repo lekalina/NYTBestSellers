@@ -8,9 +8,9 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lekalina.nytbestsellers.NYT
 import com.lekalina.nytbestsellers.vm.CategoryViewModel
 import com.lekalina.nytbestsellers.R
+import com.lekalina.nytbestsellers.api.NetworkState
 import com.lekalina.nytbestsellers.data.Category
 import com.lekalina.nytbestsellers.databinding.ActivityCategoryBinding
 import com.lekalina.nytbestsellers.vm.ContentState
@@ -18,7 +18,7 @@ import com.lekalina.nytbestsellers.vm.ContentState
 class CategoryActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityCategoryBinding
-    lateinit var model: CategoryViewModel
+    private lateinit var model: CategoryViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,12 +48,12 @@ class CategoryActivity : AppCompatActivity() {
         model.categories.observeForever { list ->
             binding.refresh.isRefreshing = false
             adapter.setList(list)
-            if(!NYT.networkState.isOnline && list.isNotEmpty()) {
+            if (!NetworkState.getInstance().isOnline && list.isNotEmpty()) {
                 // let the user know they are viewing offline content
                 Toast.makeText(context, getString(R.string.offline_content), Toast.LENGTH_SHORT).show()
             }
-            val contentState: ContentState = if(list.isEmpty()) {
-                if(NYT.networkState.isOnline) {
+            val contentState: ContentState = if (list.isEmpty()) {
+                if (NetworkState.getInstance().isOnline) {
                     ContentState.NOT_AVAILABLE
                 } else {
                     ContentState.OFFLINE

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout>
     <data>
         <variable
             name="viewModel"
@@ -10,15 +10,14 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="140dp">
 
         <ImageView
             android:id="@+id/image"
-            loadThumb="@{viewModel.book.image_url}"
+            loadThumb="@{viewModel.book.imageUrl}"
+            android:scaleType="centerInside"
             android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:minHeight="32dp"
-            android:adjustViewBounds="true"
+            android:layout_height="match_parent"
             android:layout_margin="@dimen/standard_margin"/>
 
         <LinearLayout

@@ -11,9 +11,11 @@ class BooksViewModel(private val selectedCategory: String?, private val repo: Bo
     var bookList: MutableLiveData<List<Book>> = MutableLiveData()
 
     fun getData() {
+        showLoading.postValue(true)
         selectedCategory?.let {
             repo.getBooks(selectedCategory).observeForever { list ->
                 bookList.postValue(list)
+                showLoading.postValue(false)
             }
         }
     }

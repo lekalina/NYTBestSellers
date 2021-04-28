@@ -8,12 +8,14 @@ import com.bumptech.glide.Glide
 
 abstract class BaseViewModel: ViewModel() {
 
-    var showOfflineDinosaur: MutableLiveData<Boolean> = MutableLiveData()
-    var showNoContentAvailable: MutableLiveData<Boolean> = MutableLiveData()
+    val showOfflineDinosaur: MutableLiveData<Boolean> = MutableLiveData()
+    val showNoContentAvailable: MutableLiveData<Boolean> = MutableLiveData()
+    val showLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     init {
         showOfflineDinosaur.value = false
         showNoContentAvailable.value = false
+        showLoading.value = false
     }
 
     companion object {
@@ -43,17 +45,19 @@ abstract class BaseViewModel: ViewModel() {
     }
 
     fun toggleContentStates(state: ContentState) {
-        if(state == ContentState.OFFLINE) {
-            showOfflineDinosaur.value = true
-            showNoContentAvailable.value = false
-        }
-        else if(state == ContentState.NOT_AVAILABLE) {
-            showOfflineDinosaur.value = false
-            showNoContentAvailable.value = true
-        }
-        else {
-            showOfflineDinosaur.value = false
-            showNoContentAvailable.value = false
+        when (state) {
+            ContentState.OFFLINE -> {
+                showOfflineDinosaur.value = true
+                showNoContentAvailable.value = false
+            }
+            ContentState.NOT_AVAILABLE -> {
+                showOfflineDinosaur.value = false
+                showNoContentAvailable.value = true
+            }
+            else -> {
+                showOfflineDinosaur.value = false
+                showNoContentAvailable.value = false
+            }
         }
     }
 }

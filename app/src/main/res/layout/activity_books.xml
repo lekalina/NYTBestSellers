@@ -44,6 +44,11 @@
                 layout="@layout/no_content"
                 android:visibility="@{viewModel.showNoContentAvailable ? View.VISIBLE : View.GONE}"/>
 
+            <include
+                android:id="@+id/loading"
+                layout="@layout/loading_screen"
+                android:visibility="@{viewModel.showLoading ? View.VISIBLE : View.GONE}"/>
+
         </RelativeLayout>
 
     </LinearLayout>

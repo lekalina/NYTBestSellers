@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lekalina.nytbestsellers.NYT
 import com.lekalina.nytbestsellers.R
+import com.lekalina.nytbestsellers.api.NetworkState
 import com.lekalina.nytbestsellers.data.Book
 import com.lekalina.nytbestsellers.databinding.ActivityBooksBinding
 import com.lekalina.nytbestsellers.vm.BooksViewModel
@@ -52,12 +52,12 @@ class BooksActivity: AppCompatActivity() {
         model.bookList.observeForever { list ->
             refresh.isRefreshing = false
             adapter.setList(list)
-            if(!NYT.networkState.isOnline && list.isNotEmpty()) {
+            if (!NetworkState.getInstance().isOnline && list.isNotEmpty()) {
                 // let the user know they are viewing offline content
                 Toast.makeText(context, getString(R.string.offline_content), Toast.LENGTH_SHORT).show()
             }
-            val contentState: ContentState = if(list.isEmpty()) {
-                if(NYT.networkState.isOnline) {
+            val contentState: ContentState = if (list.isEmpty()) {
+                if (NetworkState.getInstance().isOnline) {
                     ContentState.NOT_AVAILABLE
                 } else {
                     ContentState.OFFLINE
