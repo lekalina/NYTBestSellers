@@ -30,7 +30,6 @@ class BooksAdapter(private var clickListener: OnItemClickListener) : RecyclerVie
     inner class ViewHolder(private val binding: BookListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: BookItemViewModel, listener: OnItemClickListener) {
             binding.viewModel = item
-            binding.executePendingBindings()
             binding.root.setOnClickListener {
                 item.book?.let { book ->  listener.onItemClick(binding.root, book) }
             }

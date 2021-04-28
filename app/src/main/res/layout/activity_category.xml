@@ -35,12 +35,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/list"
-                android:layout_marginStart="@dimen/standard_margin"
-                android:layout_marginEnd="@dimen/standard_margin"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list"
+                    android:paddingStart="@dimen/standard_margin"
+                    android:paddingEnd="@dimen/standard_margin"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -53,6 +53,11 @@
                 android:id="@+id/no_content"
                 layout="@layout/no_content"
                 android:visibility="@{viewModel.showNoContentAvailable ? View.VISIBLE : View.GONE}"/>
+
+            <include
+                android:id="@+id/loading"
+                layout="@layout/loading_screen"
+                android:visibility="@{viewModel.showLoading ? View.VISIBLE : View.GONE}"/>
 
         </RelativeLayout>
 

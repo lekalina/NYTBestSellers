@@ -31,7 +31,6 @@ class CategoryAdapter(private var clickListener: OnItemClickListener) : Recycler
     inner class ViewHolder(private val binding: CategoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CategoryItemViewModel, listener: OnItemClickListener) {
             binding.viewModel = item
-            binding.executePendingBindings()
             binding.root.setOnClickListener {
                 item.category?.let { book ->  listener.onItemClick(binding.root, book) }
             }

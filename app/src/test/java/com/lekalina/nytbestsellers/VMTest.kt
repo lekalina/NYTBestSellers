@@ -6,10 +6,12 @@ import com.lekalina.nytbestsellers.data.Book
 import com.lekalina.nytbestsellers.data.Category
 import com.lekalina.nytbestsellers.repos.BooksRepo
 import com.lekalina.nytbestsellers.repos.CategoriesRepo
+import com.lekalina.nytbestsellers.vm.BaseViewModel
 import com.lekalina.nytbestsellers.vm.BookDetailViewModel
 import com.lekalina.nytbestsellers.vm.BooksViewModel
 import com.lekalina.nytbestsellers.vm.CategoryViewModel
 import junit.framework.TestCase.*
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -35,9 +37,11 @@ class VMTest {
     private var bookList: MutableLiveData<List<Book>> = MutableLiveData()
     private var book = Book("title", "author", "photo", "description", "uuid")
 
+    class MockClass: BaseViewModel()
+
     @Before
     fun setup() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.initMocks(this)
         val c: MutableList<Category> = ArrayList()
         c.add(category)
         categoryList.postValue(c)
@@ -61,16 +65,16 @@ class VMTest {
         val b = mockBooksRepo.getBookByTitle(title).value
         assertTrue(b?.title.equals(book.title))
         assertTrue(b?.author.equals(book.author))
-        assertTrue(b?.category_identifier.equals(book.category_identifier))
+        assertTrue(b?.categoryIdentifier.equals(book.categoryIdentifier))
         assertTrue(b?.description.equals(book.description))
-        assertTrue(b?.image_url.equals(book.image_url))
+        assertTrue(b?.imageUrl.equals(book.imageUrl))
         // setup viewModel
         val model = BookDetailViewModel(title, mockBooksRepo)
         assertTrue(b?.title.equals(model.book.value?.title))
         assertTrue(b?.author.equals(model.book.value?.author))
-        assertTrue(b?.category_identifier.equals(model.book.value?.category_identifier))
+        assertTrue(b?.categoryIdentifier.equals(model.book.value?.categoryIdentifier))
         assertTrue(b?.description.equals(model.book.value?.description))
-        assertTrue(b?.image_url.equals(model.book.value?.image_url))
+        assertTrue(b?.imageUrl.equals(model.book.value?.imageUrl))
         println("mock book = $b\nvm book = ${model.book.value}")
         println("\n")
     }
@@ -106,5 +110,22 @@ class VMTest {
        assertEquals(catVM.categories.value?.size ?: 0, cats?.size ?: 9)
        println("vm size = ${catVM.categories.value?.size}, repo size = ${cats?.size}")
        println( "\n")
+    }
+
+    @Test
+    fun baseVM() {
+        println( "baseVM() test running...")
+        val baseVM = MockClass()
+        // check defaults
+        Assert.assertEquals(baseVM.showOfflineDinosaur.value, false)
+        Assert.assertEquals(baseVM.showNoContentAvailable.value, false)
+        Assert.assertEquals(baseVM.showLoading.value, false)
+
+        baseVM.showOfflineDinosaur.postValue(true)
+        Assert.assertEquals(baseVM.showOfflineDinosaur.value, true)
+        baseVM.showNoContentAvailable.postValue(true)
+        Assert.assertEquals(baseVM.showNoContentAvailable.value, true)
+        baseVM.showLoading.postValue(true)
+        Assert.assertEquals(baseVM.showLoading.value, true)
     }
 }

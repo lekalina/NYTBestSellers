@@ -6,14 +6,16 @@ import com.lekalina.nytbestsellers.api.NetworkState
 
 class NYT: Application() {
 
-    override fun onCreate() {
-        super.onCreate()
-        appContext = applicationContext
-        networkState = NetworkState()
+    companion object {
+        // set accessible context reference to avoid passing context
+        // around in viewmodels and repos simply to initialize the db
+        // instance and network state listener
+        lateinit var context: Context
     }
 
-    companion object {
-        lateinit  var appContext: Context
-        lateinit var networkState: NetworkState
+    override fun onCreate() {
+        super.onCreate()
+        context = this
+        NetworkState.getInstance() // start listening to network state
     }
 }

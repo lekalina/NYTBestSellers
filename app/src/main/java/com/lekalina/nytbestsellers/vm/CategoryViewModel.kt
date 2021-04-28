@@ -9,8 +9,10 @@ class CategoryViewModel(private val repo: CategoriesRepo = CategoriesRepo()): Ba
     var categories: MutableLiveData<List<Category>> = MutableLiveData()
 
     fun getData() {
+        showLoading.postValue(true)
         repo.getCategories().observeForever { list ->
             categories.postValue(list)
+            showLoading.postValue(false)
         }
     }
 }
